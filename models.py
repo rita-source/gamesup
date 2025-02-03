@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from database import Base  
+from database import Base 
+from pydantic import BaseModel 
 
 class User(Base): 
     __tablename__ = "users"
@@ -25,3 +26,14 @@ class Order(Base):
 
     user = relationship("User")
     game = relationship("Game")
+    
+    from pydantic import BaseModel
+
+
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
+    class Config:
+        orm_mode = True  
+
